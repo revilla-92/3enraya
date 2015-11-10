@@ -17,4 +17,5 @@ let Casilla = React.createClass({
 			)
 	}
 });
+
 module.exports = Casilla;

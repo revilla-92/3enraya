@@ -7,4 +7,5 @@ var Cabecera = React.createClass({
 			)
 	}
 });
+
 module.exports = Cabecera;
