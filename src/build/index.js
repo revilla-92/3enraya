@@ -9,27 +9,16 @@ var casillaStyle = {
 var Casilla = React.createClass({
 	displayName: 'Casilla',
 
-	getInitialState: function getInitialState() {
-		return {
-			valor: '-'
-		};
-	},
 	manejadorClick: function manejadorClick() {
-		var valorAntiguo = this.state.valor;
-		if (valorAntiguo === "-") {
-			var valorNuevo = Math.random() < 0.5 ? 'O' : 'X';
-		} else {
-			var valorNuevo = valorAntiguo === 'X' ? 'O' : 'X';
+		if (this.props.valor === "-") {
+			this.props.manejadorClick(this.props.numeroCasilla);
 		}
-		this.setState({
-			valor: valorNuevo
-		});
 	},
 	render: function render() {
 		return React.createElement(
 			'button',
-			{ style: casillaStyle, onClick: this.manejadorClick },
-			this.state.valor
+			{ className: this.props.valor === "-" ? "clickable" : "no_clickable", style: casillaStyle, onClick: this.manejadorClick },
+			this.props.valor
 		);
 	}
 });
@@ -42,26 +31,70 @@ module.exports = Casilla;
 var Casilla = require("./Casilla.jsx");
 
 var Fila = React.createClass({
-    displayName: "Fila",
-    render: function render() {
-        return React.createElement(
-            "div",
-            null,
-            React.createElement(Casilla, null),
-            React.createElement(Casilla, null),
-            React.createElement(Casilla, null)
-        );
-    }
+	displayName: "Fila",
+
+	manejadorClick: function manejadorClick(numeroCasilla) {
+		this.props.manejadorClick(this.props.numeroFila, numeroCasilla);
+	},
+	render: function render() {
+		var casillas = this.props.valoresFila.map((function (valor, indice) {
+			return React.createElement(Casilla, { valor: valor, key: indice, numeroCasilla: indice, manejadorClick: this.manejadorClick });
+		}).bind(this));
+		return React.createElement(
+			"div",
+			null,
+			casillas
+		);
+	}
 });
 
 module.exports = Fila;
 
 },{"./Casilla.jsx":1}],3:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var Casilla = require("./Casilla.jsx");
 var Fila = require("./Fila.jsx");
 
-ReactDOM.render(React.createElement(Fila, null), document.getElementById('contenedor'));
+var Tablero = React.createClass({
+	displayName: 'Tablero',
 
-},{"./Casilla.jsx":1,"./Fila.jsx":2}]},{},[3]);
+	getInitialState: function getInitialState() {
+		return {
+			clicks: 0,
+			valoresTablero: [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+		};
+	},
+	manejadorClick: function manejadorClick(numeroFila, numeroCasilla) {
+		var valoresTablero = this.state.valoresTablero;
+		var nuevoValor = 'X';
+		if (this.state.clicks % 2 === 0) {
+			nuevoValor = 'O';
+		}
+		valoresTablero[numeroFila][numeroCasilla] = nuevoValor;
+		this.setState({
+			clicks: this.state.clicks + 1,
+			valoresTablero: this.state.valoresTablero
+		});
+	},
+	render: function render() {
+		var filas = this.state.valoresTablero.map((function (fila, indice) {
+			return React.createElement(Fila, { key: indice, valoresFila: fila, numeroFila: indice, manejadorClick: this.manejadorClick });
+		}).bind(this));
+		return React.createElement(
+			'div',
+			null,
+			filas
+		);
+	}
+});
+
+module.exports = Tablero;
+
+},{"./Fila.jsx":2}],4:[function(require,module,exports){
+"use strict";
+
+var Tablero = require("./Tablero.jsx");
+
+ReactDOM.render(React.createElement(Tablero, null), document.getElementById('contenedor'));
+
+},{"./Tablero.jsx":3}]},{},[4]);
