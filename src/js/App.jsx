@@ -61,7 +61,7 @@ function compruebaGanador(valores){
 			if(n1X === 3 || n2X === 3){
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
 				juegoFinalizado = true;
-				alert("Ha ganado el jugador X con una fila o columna");
+				alert("Ha ganado el jugador X");
 				break;
 			}
 
@@ -69,35 +69,35 @@ function compruebaGanador(valores){
 			if(n10 === 3 || n20 === 3){
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
 				juegoFinalizado = true;
-				alert("Ha ganado el jugador 0 con una fila o columna");
+				alert("Ha ganado el jugador 0");
 				break;
 			}
 
 			if(n3X === 3){
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
 				juegoFinalizado = true;
-				alert("Ha ganado el jugador X con la diagonal principal");
+				alert("Ha ganado el jugador X");
 				break;
 			}
 
 			if(n30 === 3){
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
 				juegoFinalizado = true;
-				alert("Ha ganado el jugador 0 con la diagonal principal");
+				alert("Ha ganado el jugador 0");
 				break;
 			}
 
 			if(n4X === 3){
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
 				juegoFinalizado = true;
-				alert("Ha ganado el jugador X con la diagonal inversa");
+				alert("Ha ganado el jugador X");
 				break;
 			}
 
 			if(n40 === 3){
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
 				juegoFinalizado = true;
-				alert("Ha ganado el jugador 0 con la diagonal inversa");
+				alert("Ha ganado el jugador 0");
 				break;
 			}
 		}
