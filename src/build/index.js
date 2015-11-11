@@ -6,21 +6,21 @@ var Cabecera = require('./Cabecera.jsx');
 var JUGADORX = "jugador 1 - las X";
 var JUGADOR0 = "jugador 2 - los 0";
 
-function compruebaGanador() {
+function compruebaGanador(valores) {
 	// Comprobaciones para las diagonaes.
-	if ((this.state.valores[0][0] && this.state.valores[1][1] && this.state.valores[2][2]) === 'X') {
+	if ((valores[0][0] && valores[1][1] && valores[2][2]) === 'X') {
+		alert("Ha ganado el jugador X con la diagonal principal");
+	}
+
+	if ((valores[0][0] && valores[1][1] && valores[2][2]) === '0') {
+		alert("Ha ganado el jugador 0 con la diagonal principal");
+	}
+
+	if ((valores[0][2] && valores[1][1] && valores[2][0]) === 'X') {
 		alert("Ha ganado el jugador X");
 	}
 
-	if ((this.state.valores[0][0] && this.state.valores[1][1] && this.state.valores[2][2]) === '0') {
-		alert("Ha ganado el jugador 0");
-	}
-
-	if ((this.state.valores[0][2] && this.state.valores[1][1] && this.state.valores[2][0]) === 'X') {
-		alert("Ha ganado el jugador X");
-	}
-
-	if ((this.state.valores[0][2] && this.state.valores[1][1] && this.state.valores[2][0]) === '0') {
+	if ((valores[0][2] && valores[1][1] && valores[2][0]) === '0') {
 		alert("Ha ganado el jugador 0");
 	}
 
@@ -30,37 +30,37 @@ function compruebaGanador() {
 		// Contadores para coincidencias en fila de 3.
 		var n1X = 0;
 		var n2X = 0;
-		var n1O = 0;
-		var n2O = 0;
+		var n10 = 0;
+		var n20 = 0;
 
 		for (var b = 0; b < 3; b++) {
 
 			// Comprobamos filas para el valor X
-			if (this.state.valores[a][b] === 'X') {
+			if (valores[a][b] === 'X') {
 				n1X++;
 			}
 			// Comprobamos columnas para el valor X
-			if (this.state.valores[b][a] === '0') {
+			if (valores[b][a] === '0') {
 				n2X++;
 			}
 			// Comprobamos filas para el valor Y
-			if (this.state.valores[a][b] === 'X') {
-				n1Y++;
+			if (valores[a][b] === 'X') {
+				n10++;
 			}
 			// Comprobamos columnas para el valor Y
-			if (this.state.valores[b][a] === '0') {
-				n2Y++;
+			if (valores[b][a] === '0') {
+				n20++;
 			}
 
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
 			if (n1X === 3 || n2X === 3) {
-				alert("Ha ganado el jugador X");
+				alert("Ha ganado el jugador 0");
 				break;
 			}
 
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
-			if (n1Y === 3 || n2Y === 3) {
-				alert("Ha ganado el jugador 0");
+			if (n10 === 3 || n20 === 3) {
+				alert("Ha ganado el jugador X");
 				break;
 			}
 		}
@@ -84,7 +84,7 @@ var App = React.createClass({
 			turno: this.state.turno === JUGADORX ? JUGADOR0 : JUGADORX,
 			valores: this.state.valores
 		});
-		compruebaGanador();
+		compruebaGanador(valores);
 	},
 	render: function render() {
 		var texto;
