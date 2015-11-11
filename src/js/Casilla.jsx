@@ -2,6 +2,7 @@ const casillaStyle = {
 	height: '100px',
 	width: '100px'
 };
+
 let Casilla = React.createClass({
 	casillaClick: function(){
 		if(this.props.valor==="-"){

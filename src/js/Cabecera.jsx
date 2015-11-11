@@ -2,7 +2,7 @@ var Cabecera = React.createClass({
 	render: function(){
 		return (
 			<header className="cabecera">
-			{this.props.texto}
+				{this.props.texto}
 			</header>
 			)
 	}

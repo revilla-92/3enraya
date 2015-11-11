@@ -1,4 +1,5 @@
 const Casilla = require("./Casilla.jsx");
+
 var Tablero = React.createClass({
 	tableroClick: function(numeroFila, numeroColumna){
 		this.props.manejadorTableroClick(numeroFila, numeroColumna);
@@ -10,19 +11,20 @@ var Tablero = React.createClass({
 				return (
 					<Casilla valor={valor} indiceFila={indiceFila}
 					indiceColumna={indiceColumna} key={mykey} manejadorClick={this.tableroClick}/>
-					)
+				)
 			}.bind(this));
 			return (
 				<div key={"fila"+indiceFila}>
-				{fila}
+					{fila}
 				</div>
-				)
+			)
 		}.bind(this));
 		return (
 			<div>
-			{casillas}
+				{casillas}
 			</div>
-			);
+		);
 	}
 });
+
 module.exports = Tablero;
