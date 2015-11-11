@@ -4,22 +4,6 @@ const JUGADORX = "jugador 1 - las X";
 const JUGADOR0 = "jugador 2 - los 0";
 
 function compruebaGanador(valores){
-	// Comprobaciones para las diagonaes.
-	if((valores[0][0] && valores[1][1] && valores[2][2])  === 'X'){
-		alert("Ha ganado el jugador X con la diagonal principal");
-	}
-
-	if((valores[0][0] && valores[1][1] && valores[2][2])  === '0'){
-		alert("Ha ganado el jugador 0 con la diagonal principal");
-	}
-
-	if((valores[0][2] && valores[1][1] && valores[2][0])  === 'X'){
-		alert("Ha ganado el jugador X");
-	}
-
-	if((valores[0][2] && valores[1][1] && valores[2][0])  === '0'){
-		alert("Ha ganado el jugador 0");
-	}
 
 	// Comprobaciones para filas y columnas.
 	for (var a = 0; a < 3; a++){
@@ -27,9 +11,15 @@ function compruebaGanador(valores){
 		// Contadores para coincidencias en fila de 3.
 		var n1X = 0;
 		var n2X = 0;
+		var n3X = 0;
+		var n4X = 0;
 		var n10 = 0;
 		var n20 = 0;
+		var n30 = 0;
+		var n40 = 0;
+		var juegoFinalizado = false;
 
+		// Bucle secundario para comprobar las filas y columnas.
 		for (var b = 0; b < 3; b++){
 
 			// Comprobamos filas para el valor X
@@ -37,31 +27,88 @@ function compruebaGanador(valores){
 				n1X++;
 			}
 			// Comprobamos columnas para el valor X
-			if(valores[b][a] === '0'){
+			if(valores[b][a] === 'X'){
 				n2X++;
 			}
-			// Comprobamos filas para el valor Y
-			if(valores[a][b] === 'X'){
+			// Comprobamos filas para el valor 0
+			if(valores[a][b] === '0'){
 				n10++;
 			}
-			// Comprobamos columnas para el valor Y
+			// Comprobamos columnas para el valor 0
 			if(valores[b][a] === '0'){
 				n20++;
 			}
 
+			// Comprobamos la diagonal principal.
+			if (valores[b][b] === 'X'){
+				n3X++;
+			}
+
+			if (valores[b][b] === '0'){
+				n30++;
+			}
+
+			// Comprobamos la diagonal inversa.
+			if (valores[b][2-b] === 'X'){
+				n4X++;
+			}
+
+			if(valores[b][2-b] === '0'){
+				n40++;
+			}
+
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
 			if(n1X === 3 || n2X === 3){
-				alert("Ha ganado el jugador 0");
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				juegoFinalizado = true;
+				alert("Ha ganado el jugador X con una fila o columna");
 				break;
 			}
 
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
 			if(n10 === 3 || n20 === 3){
-				alert("Ha ganado el jugador X");
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				juegoFinalizado = true;
+				alert("Ha ganado el jugador 0 con una fila o columna");
+				break;
+			}
+
+			if(n3X === 3){
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				juegoFinalizado = true;
+				alert("Ha ganado el jugador X con la diagonal principal");
+				break;
+			}
+
+			if(n30 === 3){
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				juegoFinalizado = true;
+				alert("Ha ganado el jugador 0 con la diagonal principal");
+				break;
+			}
+
+			if(n4X === 3){
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				juegoFinalizado = true;
+				alert("Ha ganado el jugador X con la diagonal inversa");
+				break;
+			}
+
+			if(n40 === 3){
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				juegoFinalizado = true;
+				alert("Ha ganado el jugador 0 con la diagonal inversa");
 				break;
 			}
 		}
+		if(juegoFinalizado){
+			break;
+		}
 	}
+};
+
+function ponerACero(a, b, c, d, e, f, g, h){
+	a = b = c = d = e = f = g = h = 0;
 };
 
 var App = React.createClass({
