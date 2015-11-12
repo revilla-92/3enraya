@@ -17,7 +17,7 @@ function compruebaGanador(valores){
 		var n20 = 0;
 		var n30 = 0;
 		var n40 = 0;
-		var juegoFinalizado = false;
+		var juegoAcabado = false;
 
 		// Bucle secundario para comprobar las filas y columnas.
 		for (var b = 0; b < 3; b++){
@@ -59,50 +59,63 @@ function compruebaGanador(valores){
 
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
 			if(n1X === 3 || n2X === 3){
+				juegoAcabado = true;
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
-				juegoFinalizado = true;
-				alert("Ha ganado el jugador X");
-				break;
+				var x = confirm("Ha ganado el jugador X. \n ¿Desea empezar otra partida?");
+				if(x === true){
+					return true;
+				}
 			}
 
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
 			if(n10 === 3 || n20 === 3){
+				juegoAcabado = true;
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
-				juegoFinalizado = true;
-				alert("Ha ganado el jugador 0");
-				break;
+				var x = confirm("Ha ganado el jugador 0 \n ¿Desea empezar otra partida?");
+				if(x === true){
+					return true;
+				}
 			}
 
 			if(n3X === 3){
+				juegoAcabado = true;
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
-				juegoFinalizado = true;
-				alert("Ha ganado el jugador X");
-				break;
+				var x = confirm("Ha ganado el jugador X \n ¿Desea empezar otra partida?");
+				if(x === true){
+					return true;
+				}
 			}
 
 			if(n30 === 3){
+				juegoAcabado = true;
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
-				juegoFinalizado = true;
-				alert("Ha ganado el jugador 0");
-				break;
+				var x = confirm("Ha ganado el jugador 0 \n ¿Desea empezar otra partida?");
+				if(x === true){
+					return true;
+				}
 			}
 
 			if(n4X === 3){
+				juegoAcabado = true;
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
-				juegoFinalizado = true;
-				alert("Ha ganado el jugador X");
-				break;
+				var x = confirm("Ha ganado el jugador X \n ¿Desea empezar otra partida?");
+				if(x === true){
+					return true;
+				}
 			}
 
 			if(n40 === 3){
+				juegoAcabado = true;
 				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
-				juegoFinalizado = true;
-				alert("Ha ganado el jugador 0");
+				var x = confirm("Ha ganado el jugador 0 \n ¿Desea empezar otra partida?");
+				if(x === true){
+					return true;
+				}
+			}
+
+			if(juegoAcabado === true){
 				break;
 			}
-		}
-		if(juegoFinalizado){
-			break;
 		}
 	}
 };
@@ -130,7 +143,17 @@ var App = React.createClass({
 			turno: this.state.turno === JUGADORX ? JUGADOR0:JUGADORX,
 			valores: this.state.valores
 		});
-		compruebaGanador(valores);
+		var z = compruebaGanador(this.state.valores);
+		if(z === true){
+			this.setState({
+				turno: JUGADORX,
+				valores: [
+				['-', '-', '-'],
+				['-', '-', '-'],
+				['-', '-', '-']
+				]
+			});
+		}
 	},
 	render: function(){
 		var texto;
