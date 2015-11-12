@@ -8,6 +8,8 @@ var JUGADOR0 = "jugador 2 - los 0";
 
 function compruebaGanador(valores) {
 
+	var nab = 9;
+
 	// Comprobaciones para filas y columnas.
 	for (var a = 0; a < 3; a++) {
 
@@ -24,6 +26,12 @@ function compruebaGanador(valores) {
 
 		// Bucle secundario para comprobar las filas y columnas.
 		for (var b = 0; b < 3; b++) {
+
+			// Comprobamos que ya no hay más casillas en el tablero por rellenar.
+			if (valores[a][b] === 'X' || valores[a][b] === '0') {
+				nab--;
+				console.log(nab);
+			}
 
 			// Comprobamos filas para el valor X
 			if (valores[a][b] === 'X') {
@@ -58,6 +66,16 @@ function compruebaGanador(valores) {
 
 			if (valores[b][2 - b] === '0') {
 				n40++;
+			}
+
+			// Si se termina el juego y nadie ha ganado se invita a jugar otra partida.
+			if (nab === 0) {
+				juegoAcabado = true;
+				ponerACero(n1X, n2X, n3X, n4X, n10, n20, n30, n40);
+				var x = confirm("Juego Terminado. Nadie ha ganado. \n ¿Desea empezar otra partida?");
+				if (x === true) {
+					return true;
+				}
 			}
 
 			// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
