@@ -152,6 +152,16 @@ var App = React.createClass({
 			]
 		};
 	},
+	getInitialStateButton: function(){
+		this.setState({
+			turno: JUGADORX,
+			valores: [
+				['-', '-', '-'],
+				['-', '-', '-'],
+				['-', '-', '-']
+			]
+		});
+	},
 	appClick: function(numeroFila, numeroColumna){
 		let valores = this.state.valores;
 		let nuevoValor = this.state.turno === JUGADORX ? 'X':'0';
@@ -177,9 +187,9 @@ var App = React.createClass({
 		texto = "Turno del " + this.state.turno;
 		return (
 			<div>
-			<Cabecera texto={texto}/>
-			<Tablero valores={this.state.valores}
-			manejadorTableroClick={this.appClick}/>
+				<Cabecera texto={texto}/>
+				<Tablero valores={this.state.valores} manejadorTableroClick={this.appClick}/>
+				<button onClick={this.getInitialStateButton} > Reiniciar Partida. </button>
 			</div>
 		)
 	}

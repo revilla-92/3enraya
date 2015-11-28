@@ -30,7 +30,6 @@ function compruebaGanador(valores) {
 			// Comprobamos que ya no hay más casillas en el tablero por rellenar.
 			if (valores[a][b] === 'X' || valores[a][b] === '0') {
 				nab--;
-				console.log(nab);
 			}
 
 			// Comprobamos filas para el valor X
@@ -154,6 +153,13 @@ var App = React.createClass({
 			valores: [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
 		};
 	},
+	getInitialStateButton: function getInitialStateButton() {
+		console.log("Entro en el getInitialStateButton");
+		this.setState({
+			turno: JUGADORX,
+			valores: [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+		});
+	},
 	appClick: function appClick(numeroFila, numeroColumna) {
 		var valores = this.state.valores;
 		var nuevoValor = this.state.turno === JUGADORX ? 'X' : '0';
@@ -177,8 +183,12 @@ var App = React.createClass({
 			'div',
 			null,
 			React.createElement(Cabecera, { texto: texto }),
-			React.createElement(Tablero, { valores: this.state.valores,
-				manejadorTableroClick: this.appClick })
+			React.createElement(Tablero, { valores: this.state.valores, manejadorTableroClick: this.appClick }),
+			React.createElement(
+				'button',
+				{ onClick: this.getInitialStateButton },
+				' Reiniciar Partida. '
+			)
 		);
 	}
 });
