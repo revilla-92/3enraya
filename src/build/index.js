@@ -36,6 +36,7 @@ function compruebaGanador(valores) {
 				n1X++;
 				n--;
 			}
+
 			// Comprobamos columnas para el valor X.
 			if (valores[b][a] === 'X') {
 				n2X++;
@@ -59,6 +60,7 @@ function compruebaGanador(valores) {
 				n10++;
 				n--;
 			}
+
 			// Comprobamos columnas para el valor 0.
 			if (valores[b][a] === '0') {
 				n20++;
@@ -77,23 +79,23 @@ function compruebaGanador(valores) {
 				n--;
 			}
 		}
-	}
 
-	// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
-	if (n1X === 3 || n2X === 3 || n3X === 3 || n4X === 3) {
-		juegoConGanador = true;
-		return confirm("Ha ganado el jugador X. \n ¿Desea empezar otra partida?");
-	}
+		// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
+		if (n1X === 3 || n2X === 3 || n3X === 3 || n4X === 3) {
+			juegoConGanador = true;
+			return confirm("Ha ganado el jugador X. \n ¿Desea empezar otra partida?");
+		}
 
-	// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
-	if (n10 === 3 || n20 === 3 || n30 === 3 || n40 === 3) {
-		juegoConGanador = true;
-		return confirm("Ha ganado el jugador 0 \n ¿Desea empezar otra partida?");
-	}
+		// Si alguno de los contadores ha llegado a 3 coincidencias con X es que ha hecho 3 en raya y finaliza el juego.
+		if (n10 === 3 || n20 === 3 || n30 === 3 || n40 === 3) {
+			juegoConGanador = true;
+			return confirm("Ha ganado el jugador 0 \n ¿Desea empezar otra partida?");
+		}
 
-	// Si se ha acabado el juego sin ganador.
-	if (n === 0 && !juegoConGanador) {
-		return confirm("Juego Terminado. Nadie ha ganado. \n ¿Desea empezar otra partida?");
+		// Si se ha acabado el juego sin ganador.
+		if (n === 0 && !juegoConGanador) {
+			return confirm("Juego Terminado. Nadie ha ganado. \n ¿Desea empezar otra partida?");
+		}
 	}
 };
 
